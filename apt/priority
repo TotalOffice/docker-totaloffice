@@ -1,0 +1,19 @@
+Package: *
+Pin: release a=stable
+Pin-Priority: 900
+
+Package: *
+Pin: release a=testing
+Pin-Priority: 800
+
+Package: *
+Pin: release a=unstable
+Pin-Priority: 800
+
+Package: salt-minion
+Pin: release a=wheezy-backports
+Pin-Priority: 999
+
+Package: python-zmq
+Pin: release a=wheezy-backports
+Pin-Priority: 999

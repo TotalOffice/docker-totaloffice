@@ -1,0 +1,5 @@
+Cmnd_Alias	NSCD = /usr/sbin/nscd
+Cmnd_Alias	SALT = /usr/bin/salt-call
+Cmnd_Alias	DOVEADM = /usr/bin/doveadm
+
+www-data	ALL = (root) NOPASSWD: NSCD, SALT, TO
