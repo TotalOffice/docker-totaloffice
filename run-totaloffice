@@ -1,0 +1,7 @@
+#!/bin/bash
+pushd ./toconfigure
+echo "Configuring slapd"
+configure.d/25-slapd
+popd
+echo "Starting TotalOffice"
+bin/toserver 0.0.0.0:8080

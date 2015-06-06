@@ -20,3 +20,5 @@ RUN apt-get --force-yes -y install python-pumpkin
 RUN mkdir /var/lib/totaloffice
 RUN salt-call --local sys.doc apt
 RUN apt-get -y install python-daemon
+COPY run-totaloffice /
+ENTRYPOINT /run-totaloffice
