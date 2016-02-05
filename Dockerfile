@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:jessie
 MAINTAINER avinash.s@yukthi.com
 
 ADD apt/backports.list /etc/apt/sources.list.d/

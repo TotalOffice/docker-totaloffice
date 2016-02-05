@@ -1,4 +1,17 @@
-#!/bin/bash
+#!/bin/bash -v
 
-echo "Starting TotalOffice"
+sleep 10
+
+TOADMIN=$(ldapsearch -LLL -x -H ${LDAP_URI} -b ${LDAP_BASE_DN} '(uid=toadmin)' dn)
+
+echo ${TOADMIN}
+
+if [ -z "${TOADMIN}" ]; then
+    echo -n "Creating initial LDAP records..."
+    pushd toconfigure
+    ./configure.d/25-slapd && echo "done."
+    popd
+fi
+
+echo "Starting TotalOffice..."
 bin/toserver 0.0.0.0:8080
