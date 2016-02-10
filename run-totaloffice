@@ -1,6 +1,6 @@
 #!/bin/bash -v
 
-sleep 10
+sleep 2
 
 TOADMIN=$(ldapsearch -LLL -x -H ${LDAP_URI} -b ${LDAP_BASE_DN} '(uid=toadmin)' dn)
 
@@ -14,4 +14,9 @@ if [ -z "${TOADMIN}" ]; then
 fi
 
 echo "Starting TotalOffice..."
-bin/toserver 0.0.0.0:8080
+#bin/toserver 0.0.0.0:8080
+
+# Enable the Apache site
+a2ensite totaloffice
+
+apache2ctl -D FOREGROUND
