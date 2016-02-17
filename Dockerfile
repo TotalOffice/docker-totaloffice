@@ -1,8 +1,6 @@
 FROM debian:jessie
 MAINTAINER avinash.s@yukthi.com
 
-ADD sudoers/totaloffice /etc/sudoers.d/
-
 RUN apt-get update
 RUN apt-get -y dist-upgrade
 RUN apt-get -y install python-ldap
@@ -18,6 +16,8 @@ RUN apt-get -y install slapd slapd-smbk5pwd
 
 # Cleanup
 RUN apt-get clean
+
+ADD sudoers/totaloffice /etc/sudoers.d/
 
 RUN mkdir /var/lib/totaloffice
 COPY run-totaloffice /
