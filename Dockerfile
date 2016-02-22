@@ -14,11 +14,18 @@ RUN apt-get -y install python-flask
 RUN echo "slapd   slapd/no_configuration  boolean true" | debconf-set-selections
 RUN apt-get -y install slapd slapd-smbk5pwd
 
+# Install Apache
+RUN apt-get -y install apache2 libapache2-mod-wsgi
+RUN sed -i s/Listen\ 443/Listen\ 443\\n\ \ \ \ Listen\ 7080/ /etc/apache2/ports.conf
+
+RUN a2enmod ssl
+RUN a2enmod wsgi
+RUN a2ensite default-ssl
+
 # Cleanup
 RUN apt-get clean
 
-ADD sudoers/totaloffice /etc/sudoers.d/
+RUN adduser --home /var/lib/totaloffice --system --group --gecos "TotalOffice Account,,," --shell /bin/sh totaloffice
 
-RUN mkdir /var/lib/totaloffice
 COPY run-totaloffice /
 ENTRYPOINT /run-totaloffice
