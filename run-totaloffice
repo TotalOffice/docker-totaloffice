@@ -1,6 +1,7 @@
 #!/bin/bash -v
 
-sleep 2
+# Wait for LDAP server to start.
+sleep 5
 
 TOADMIN=$(ldapsearch -LLL -x -H ${LDAP_URI} -b ${LDAP_BASE_DN} '(uid=toadmin)' dn)
 
@@ -9,14 +10,17 @@ echo ${TOADMIN}
 if [ -z "${TOADMIN}" ]; then
     echo -n "Creating initial LDAP records..."
     pushd toconfigure
-    ./configure.d/25-slapd && echo "done."
+    ./configure.d/20-slapd && echo "done."
     popd
 fi
 
-echo "Starting TotalOffice..."
-#bin/toserver 0.0.0.0:8080
-
-# Enable the Apache site
+# Enable the Apache site and start the web server
+cp /totaloffice/examples/apache/totaloffice.conf /etc/apache2/sites-available
 a2ensite totaloffice
 
-apache2ctl -D FOREGROUND
+echo "Starting TotalOffice..."
+# toserver for development
+bin/toserver 0.0.0.0:8080
+
+# Apache for production
+#apache2ctl -D FOREGROUND
