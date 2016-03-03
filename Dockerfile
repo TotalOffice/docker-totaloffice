@@ -16,6 +16,7 @@ RUN apt-get -y install slapd slapd-smbk5pwd
 
 # Install Apache
 RUN apt-get -y install apache2 libapache2-mod-wsgi
+RUN apt-get -y install python-daemon
 RUN sed -i s/Listen\ 443/Listen\ 443\\n\ \ \ \ Listen\ 7080/ /etc/apache2/ports.conf
 
 RUN a2enmod ssl
