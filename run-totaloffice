@@ -1,5 +1,9 @@
 #!/bin/bash -v
 
+# Install the JS libraries
+npm install
+bower install
+
 # Wait for LDAP server to start.
 sleep 5
 
@@ -19,7 +23,8 @@ fi
 
 echo "Starting TotalOffice..."
 # toserver for development
-bin/toserver 0.0.0.0:8080
+#bin/toserver 0.0.0.0:8080
+nf start
 
 # Apache for production
 #apache2ctl -D FOREGROUND
