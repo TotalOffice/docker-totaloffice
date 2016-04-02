@@ -4,27 +4,5 @@
 npm install
 bower install
 
-# Wait for LDAP server to start.
-sleep 5
-
-TOADMIN=$(ldapsearch -LLL -x -H ${LDAP_URI} -b ${LDAP_BASE_DN} '(uid=toadmin)' dn)
-
-echo ${TOADMIN}
-
-if [ -z "${TOADMIN}" ]; then
-    pushd toconfigure
-    echo -n "Creating initial LDAP records..."
-    ./configure.d/20-slapd && echo "done."
-    echo -n "Configuring Apache..."
-    cp /totaloffice/examples/apache/totaloffice.conf /etc/apache2/sites-available
-    ./configure.d/30-apache && echo "done."
-    popd
-fi
-
 echo "Starting TotalOffice..."
-# toserver for development
-#bin/toserver 0.0.0.0:8080
 nf start
-
-# Apache for production
-#apache2ctl -D FOREGROUND
