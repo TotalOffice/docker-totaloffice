@@ -5,6 +5,7 @@ RUN apt-get update
 RUN apt-get -y dist-upgrade
 RUN apt-get -y install python-ldap
 RUN apt-get -y install python-apt
+RUN apt-get -y install python-daemon
 RUN apt-get -y install ldap-utils
 RUN apt-get -y install python-smbpasswd
 RUN apt-get -y install python-psycopg2
