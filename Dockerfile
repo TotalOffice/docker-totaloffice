@@ -16,6 +16,7 @@ RUN apt-get -y install npm
 RUN apt-get -y install git
 RUN ln -s /usr/bin/nodejs /usr/local/bin/node
 RUN npm install -g brunch@1.8.5 bower foreman
+RUN apt-get -y install python-requests
 # Cleanup
 RUN apt-get clean
 
